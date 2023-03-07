@@ -1,20 +1,33 @@
 package brot.inputs;
 
 import brot.main.Game;
+import brot.main.GameStates;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class MyMouseListener implements MouseListener, MouseMotionListener {
+    private Game game;
 
     public MyMouseListener(Game game) {
+        this.game = game;
 
     }
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getButton() == MouseEvent.BUTTON1) {
-            System.out.println("Mouse Pos: " + e.getX() + " : " + e.getY());
+            switch (GameStates.gameState) {
+                case MENU:
+                    game.getMenu().mouseClicked(e.getX(), e.getY());
+                    break;
+                case PLAYING:
+                    break;
+                case SETTINGS:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
