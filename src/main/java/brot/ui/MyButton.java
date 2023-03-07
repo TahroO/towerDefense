@@ -12,6 +12,7 @@ public class MyButton {
         this.y = y;
         this.width = width;
         this.height = height;
+        initBounds();
     }
     private void initBounds() {
         this.bounds = new Rectangle(x, y, width, height);
