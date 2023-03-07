@@ -5,6 +5,9 @@ import brot.ui.MyButton;
 
 import java.awt.*;
 
+import static brot.main.GameStates.MENU;
+import static brot.main.GameStates.setGameState;
+
 public class Settings extends GameScene implements SceneMethods{
     private MyButton bMenu;
     public Settings(Game game) {
@@ -29,6 +32,9 @@ public class Settings extends GameScene implements SceneMethods{
 
     @Override
     public void mouseClicked(int x, int y) {
+        if (bMenu.getBounds().contains(x,y)) {
+            setGameState(MENU);
+        }
 
     }
 
