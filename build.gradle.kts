@@ -22,10 +22,10 @@ application {
 sourceSets {
     main {
         java {
-            srcDir("source")
+            srcDir("src/main/java")
         }
         resources {
-            srcDir("resources")
+            srcDir("src/main/resources")
         }
     }
     test {
@@ -37,4 +37,17 @@ sourceSets {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks.create("printSourceSetInformation") {
+    doLast {
+        sourceSets.forEach {
+            println("[${it.name}]")
+            print("-->Java sources: ${it.allJava.srcDirs}\n")
+            print("-->Resources: ${it.resources.srcDirs}\n")
+            print("-->Output classes: ${it.output.classesDirs.files}\n")
+            print("-->Output resources: ${it.output.resourcesDir}\n")
+            println("")
+        }
+    }
 }
