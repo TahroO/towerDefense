@@ -1,16 +1,20 @@
 package brot.inputs;
 
+import brot.main.Game;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class MyMouseListener implements MouseListener, MouseMotionListener {
+
+    public MyMouseListener(Game game) {
+
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
-            System.out.println("Left Button clicked");
-        } else if (e.getButton() == MouseEvent.BUTTON3) {
-            System.out.println("Right Button clicked");
+        if(e.getButton() == MouseEvent.BUTTON1) {
+            System.out.println("Mouse Pos: " + e.getX() + " : " + e.getY());
         }
     }
 
