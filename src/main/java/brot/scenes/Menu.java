@@ -54,14 +54,25 @@ public class Menu extends GameScene implements SceneMethods{
     public void mouseClicked(int x, int y) {
         if (bPlaying.getBounds().contains(x, y)) {
             setGameState(PLAYING);
+        } else if (bSettings.getBounds().contains(x,y)) {
+            setGameState(SETTINGS);
+        } else if (bQuit.getBounds().contains(x,y)) {
+            System.exit(0);
+
         }
     }
 
     @Override
     public void mouseMoved(int x, int y) {
         bPlaying.setMouseOver(false);
+        bSettings.setMouseOver(false);
+        bQuit.setMouseOver(false);
         if (bPlaying.getBounds().contains(x, y)) {
             bPlaying.setMouseOver(true);
+        } else if (bSettings.getBounds().contains(x,y)) {
+            bSettings.setMouseOver(true);
+        } else if (bQuit.getBounds().contains(x,y)) {
+            bQuit.setMouseOver(true);
         }
     }
 
@@ -70,6 +81,11 @@ public class Menu extends GameScene implements SceneMethods{
 
         if (bPlaying.getBounds().contains(x, y)) {
             bPlaying.setMousePressed(true);
+        } else if (bSettings.getBounds().contains(x, y)) {
+            bSettings.setMousePressed(true);
+        } else if (bQuit.getBounds().contains(x, y)) {
+            bQuit.setMousePressed(true);
+
         }
     }
 
@@ -80,6 +96,8 @@ public class Menu extends GameScene implements SceneMethods{
 
     private void resetButtons() {
         bPlaying.resetBooleans();
+        bSettings.resetBooleans();
+        bQuit.resetBooleans();
     }
 
     private void drawButtons(Graphics g) {
