@@ -53,6 +53,10 @@ public class MyButton {
         int h = g.getFontMetrics().getHeight();
         g.drawString(text, x - w / 2 + width / 2, y + h / 2 + height / 2);
     }
+    public void resetBooleans() {
+        this.mouseOver = false;
+        this.mousePressed = false;
+    }
     public void setMousePressed(boolean mousePressed) {
         this.mousePressed = mousePressed;
     }

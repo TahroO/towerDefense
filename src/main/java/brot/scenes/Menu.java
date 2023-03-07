@@ -28,7 +28,15 @@ public class Menu extends GameScene implements SceneMethods{
     }
 
     private void initButtons() {
-        bPlaying = new MyButton("Play", 100, 100, 100, 30);
+        int w = 150;
+        int h = w / 3;
+        int x = 640 / 2 - w / 2;
+        int y = 150;
+        int yOffset = 100;
+
+        bPlaying = new MyButton("Play", x, y, w, h);
+        bSettings = new MyButton("Settings", x, y +yOffset, w, h);
+        bQuit = new MyButton("Quit", x, y +yOffset * 2, w, h);
     }
 
     @Override
@@ -71,11 +79,13 @@ public class Menu extends GameScene implements SceneMethods{
     }
 
     private void resetButtons() {
-        bPlaying.setMousePressed(false);
+        bPlaying.resetBooleans();
     }
 
     private void drawButtons(Graphics g) {
         bPlaying.draw(g);
+        bSettings.draw(g);
+        bQuit.draw(g);
     }
     public void importImg() {
         InputStream is = getClass().getResourceAsStream("/spriteatlas.png");
