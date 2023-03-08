@@ -108,7 +108,6 @@ public class Game extends JFrame implements Runnable {
             }
         }
     }
-
     //Getters and Setters:
     public Render getRender() {
         return render;
