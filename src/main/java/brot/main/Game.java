@@ -1,7 +1,10 @@
 package brot.main;
 
+import brot.helperMethods.LoadSave;
 import brot.inputs.KeyboardListener;
 import brot.inputs.MyMouseListener;
+import brot.managers.TileManager;
+import brot.scenes.Editing;
 import brot.scenes.Playing;
 import brot.scenes.Settings;
 import brot.scenes.Menu;
@@ -22,6 +25,8 @@ public class Game extends JFrame implements Runnable {
     private Menu menu;
     private Playing playing;
     private Settings settings;
+    private Editing editing;
+    private TileManager tileManager;
 
 
     public Game() {
@@ -29,21 +34,33 @@ public class Game extends JFrame implements Runnable {
         setLocationRelativeTo(null);
         setResizable(false);
         initClasses();
+        createDefaultLevel();
         add(gameScreen);
         pack();
         setVisible(true);
     }
 
+    private void createDefaultLevel() {
+        int[] arr = new int[400];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = 0;
+        }
+        LoadSave.createLevel("new level", arr);
+    }
+
     private void initClasses() {
+        tileManager = new TileManager();
         render = new Render(this);
         gameScreen = new GameScreen(this);
         menu = new Menu(this);
         playing = new Playing(this);
         settings = new Settings(this);
+        editing = new Editing(this);
     }
 
     private void start() {
-        gameThread = new Thread(this) {};
+        gameThread = new Thread(this) {
+        };
         gameThread.start();
     }
 
@@ -107,6 +124,14 @@ public class Game extends JFrame implements Runnable {
 
     public Settings getSettings() {
         return settings;
-   }
+    }
+
+    public Editing getEditor() {
+        return editing;
+    }
+
+    public TileManager getTileManager() {
+        return tileManager;
+    }
 
 }

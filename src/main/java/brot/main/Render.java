@@ -11,7 +11,7 @@ public class Render {
     }
 
     public void render(Graphics g) {
-        switch(GameStates.gameState) {
+        switch (GameStates.gameState) {
             case MENU:
                 game.getMenu().render(g);
                 break;
@@ -21,7 +21,11 @@ public class Render {
             case SETTINGS:
                 game.getSettings().render(g);
                 break;
+            case EDIT:
+                game.getEditor().render(g);
+                break;
+            default:
+                break;
         }
     }
-
 }

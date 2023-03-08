@@ -1,65 +1,59 @@
-package brot.scenes;
+package brot.ui;
 
-import brot.main.Game;
-import brot.ui.MyButton;
+import brot.scenes.Playing;
 
 import java.awt.*;
 
 import static brot.main.GameStates.MENU;
 import static brot.main.GameStates.setGameState;
 
-public class Settings extends GameScene implements SceneMethods {
+public class ActionBar extends Bar {
+    private Playing playing;
     private MyButton bMenu;
 
-    public Settings(Game game) {
-        super(game);
+    public ActionBar(int x, int y, int width, int height, Playing playing) {
+        super(x, y, width, height);
+        this.playing = playing;
         initButtons();
     }
 
-    private void initButtons() {
-        bMenu = new MyButton("Menu", 2, 2, 100, 30);
+    public void draw(Graphics g) {
+        //Background
+        g.setColor(new Color(252, 165, 3));
+        g.fillRect(x, y, width, height);
+        //Buttons
+        drawButtons(g);
     }
 
-    @Override
-    public void render(Graphics g) {
-        g.setColor(Color.red);
-        g.fillRect(0, 0, 640, 640);
-        drawButtons(g);
+    private void initButtons() {
+        bMenu = new MyButton("Menu", 2, 642, 100, 30);
     }
 
     private void drawButtons(Graphics g) {
         bMenu.draw(g);
     }
 
-    @Override
     public void mouseClicked(int x, int y) {
         if (bMenu.getBounds().contains(x, y)) {
             setGameState(MENU);
         }
     }
 
-    @Override
     public void mouseMoved(int x, int y) {
         bMenu.setMouseOver(false);
+
         if (bMenu.getBounds().contains(x, y)) {
             bMenu.setMouseOver(true);
         }
     }
 
-    @Override
     public void mousePressed(int x, int y) {
+        if (bMenu.getBounds().contains(x, y)) {
+            bMenu.setMousePressed(true);
+        }
     }
 
-    @Override
     public void mouseReleased(int x, int y) {
-        resetButtons();
-    }
-
-    @Override
-    public void mouseDragged(int x, int y) {
-    }
-
-    private void resetButtons() {
         bMenu.resetBooleans();
     }
 }

@@ -15,6 +15,7 @@ public class Utils {
         }
         return newArr;
     }
+
     public static int[] twoDto1DintArr(int[][] twoArr) {
         int[] oneArr = new int[twoArr.length * twoArr[0].length];
         for (int j = 0; j < twoArr.length; j++) {
