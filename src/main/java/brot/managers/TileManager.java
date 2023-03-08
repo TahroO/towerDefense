@@ -25,6 +25,9 @@ public class TileManager {
     private void loadAtlas() {
         atlas = LoadSave.getSpriteAtlas();
     }
+    public Tile getTile(int id) {
+        return tiles.get(id);
+    }
 
     public BufferedImage getSprite(int id) {
         return tiles.get(id).getSprite();
