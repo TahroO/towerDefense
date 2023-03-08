@@ -1,6 +1,7 @@
 package brot.scenes;
 
 import brot.helperMethods.LevelBuilder;
+import brot.helperMethods.LoadSave;
 import brot.main.Game;
 import brot.managers.TileManager;
 import brot.objects.Tile;
@@ -24,13 +25,12 @@ public class Playing extends GameScene implements SceneMethods {
 
     public Playing(Game game) {
         super(game);
-
-
         //The lvl
         lvl = LevelBuilder.getLevelData();
         //Tilemanager
         tileManager = new TileManager();
         bottomBar = new BottomBar(0, 640, 640, 100, this);
+        LoadSave.CreateFile();
     }
 
 

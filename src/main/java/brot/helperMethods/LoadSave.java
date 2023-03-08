@@ -2,6 +2,7 @@ package brot.helperMethods;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -15,5 +16,16 @@ public class LoadSave {
             e.printStackTrace();
         }
         return img;
+    }
+
+    // Create a txt file to store map data
+    public static void CreateFile() {
+        File txtFile = new File("resources/main/testTextFile.txt");
+        try {
+            txtFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
