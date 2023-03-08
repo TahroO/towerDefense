@@ -19,8 +19,8 @@ public class LoadSave {
     }
 
     // Create a txt file to store map data
-    public static void CreateFile() {
-        File txtFile = new File("resources/main/testTextFile.txt");
+    public static void createFile() {
+        File txtFile = new File("src/main/resources/testTextFile.txt");
         try {
             txtFile.createNewFile();
         } catch (IOException e) {
