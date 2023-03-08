@@ -2,9 +2,9 @@ package brot.helperMethods;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class LoadSave {
     public static BufferedImage getSpriteAtlas() {
@@ -28,4 +28,70 @@ public class LoadSave {
         }
 
     }
+    public static void createLevel(String name, int[] idArr) {
+        File newLevel = new File("src/main/resources/" + name + ".txt");
+        if (newLevel.exists()) {
+            System.out.println("File: " + name + " already exists!");
+            return;
+        } else {
+            try {
+                newLevel.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            writeToFile(newLevel, idArr);
+        }
+    }
+    private static void writeToFile(File f, int[] idArr) {
+        try {
+            PrintWriter pw = new PrintWriter(f);
+            for (Integer i : idArr) {
+                pw.println(i);
+            }
+            pw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void saveLevel(String name, int[][] idArr) {
+        File levelFile = new File("src/main/resources/" + name + ".txt");
+        if (levelFile.exists()) {
+            writeToFile(levelFile, Utils.twoDto1DintArr(idArr));
+        } else {
+            System.out.println("File: " + name + " does not exits!");
+        }
+    }
+    private static ArrayList<Integer> readFromFile(File file) {
+        ArrayList<Integer> list = new ArrayList<>();
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                // Transform String into Integer to store it in Integer ArrayList
+                list.add(Integer.parseInt(sc.nextLine()));
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static int[][] getLevelData(String name) {
+        File lvlFile = new File("src/main/resources/" + name + ".txt");
+        if (lvlFile.exists()) {
+            ArrayList<Integer> list = readFromFile(lvlFile);
+            return Utils.arrayListTo2Dint(list, 20, 20);
+        } else {
+            System.out.println("File: " +  name + " does not exits!");
+            return null;
+        }
+    }
+    // Save 2d int array to file
+
+    // Load int array from file
+
+    // Create a new lvl with default values
+
+
+
 }

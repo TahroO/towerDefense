@@ -25,12 +25,31 @@ public class Playing extends GameScene implements SceneMethods {
 
     public Playing(Game game) {
         super(game);
-        //The lvl
+        // The lvl
         lvl = LevelBuilder.getLevelData();
-        //Tilemanager
+        // Tilemanager
         tileManager = new TileManager();
         bottomBar = new BottomBar(0, 640, 640, 100, this);
-        LoadSave.createFile();
+//        LoadSave.createFile();
+//        LoadSave.writeToFile();
+//        LoadSave.readFromFile();
+        createDefaultLevel();
+        loadDefaultLevel();
+    }
+
+    public void saveLevel() {
+        LoadSave.saveLevel("new level", lvl);
+    }
+    private void loadDefaultLevel() {
+        lvl = LoadSave.getLevelData("new level");
+    }
+
+    private void createDefaultLevel() {
+        int[] arr = new int[400];
+        for (int i=0; i < arr.length; i++) {
+            arr[i] = 0;
+        }
+        LoadSave.createLevel("new level", arr);
     }
 
 
@@ -42,7 +61,6 @@ public class Playing extends GameScene implements SceneMethods {
                 g.drawImage(tileManager.getSprite(id), x * 32, y * 32, null);
             }
         }
-
         bottomBar.draw(g);
         drawSelectedTile(g);
     }

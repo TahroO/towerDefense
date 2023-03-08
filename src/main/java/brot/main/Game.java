@@ -107,6 +107,6 @@ public class Game extends JFrame implements Runnable {
 
     public Settings getSettings() {
         return settings;
-    }
+   }
 
 }
