@@ -4,8 +4,13 @@ import brot.helperMethods.ImgFix;
 import brot.helperMethods.LoadSave;
 import brot.objects.Tile;
 
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
+import static brot.helperMethods.Constants.Tiles.ROAD_TILE;
+import static brot.helperMethods.Constants.Tiles.GRASS_TILE;
+import static brot.helperMethods.Constants.Tiles.WATER_TILE;
 
 public class TileManager {
     public Tile GRASS, WATER, ROAD_LR, ROAD_TB, ROAD_B_TO_R, ROAD_L_TO_B, ROAD_L_TO_T, ROAD_T_TO_R,
@@ -48,84 +53,67 @@ public class TileManager {
     }
     public void createTiles() {
         int id = 0;
-        tiles.add(GRASS = new Tile(getSprite(9,0), id++, "Grass"));
-        tiles.add(WATER = new Tile(getAniSprites(0,0), id++, "Water"));
+        tiles.add(GRASS = new Tile(getSprite(9,0), id++, GRASS_TILE));
+        tiles.add(WATER = new Tile(getAniSprites(0,0), id++, WATER_TILE));
 
-        roadsS.add(ROAD_LR = new Tile(getSprite(8,0), id++, "Road"));
-        roadsS.add(ROAD_TB = new Tile(ImgFix.getRotImg(getSprite(8,0), 90), id++, "TB_ROAD"));
+        roadsS.add(ROAD_LR = new Tile(getSprite(8,0), id++, ROAD_TILE));
+        roadsS.add(ROAD_TB = new Tile(ImgFix.getRotImg(getSprite(8,0), 90), id++, ROAD_TILE));
 
-        roadsC.add(ROAD_B_TO_R = new Tile(getSprite(7,0), id++, "Road_Bottom_To_Right"));
-        roadsC.add(ROAD_L_TO_B = new Tile(ImgFix.getRotImg(getSprite(7,0), 90), id++, "Road_Left_To_Bottom"));
-        roadsC.add(ROAD_L_TO_T = new Tile(ImgFix.getRotImg(getSprite(7,0), 180), id++, "Road_Left_To_Top"));
-        roadsC.add(ROAD_T_TO_R = new Tile(ImgFix.getRotImg(getSprite(7,0), 270), id++, "Road_Top_To_Right"));
+        roadsC.add(ROAD_B_TO_R = new Tile(getSprite(7,0), id++, ROAD_TILE));
+        roadsC.add(ROAD_L_TO_B = new Tile(ImgFix.getRotImg(getSprite(7,0), 90), id++, ROAD_TILE));
+        roadsC.add(ROAD_L_TO_T = new Tile(ImgFix.getRotImg(getSprite(7,0), 180), id++, ROAD_TILE));
+        roadsC.add(ROAD_T_TO_R = new Tile(ImgFix.getRotImg(getSprite(7,0), 270), id++, ROAD_TILE));
 
         corners.add(BL_WATER_CORNER = new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(5,0), 0
-                ), id++, "BL_WATER_CORNER"));
+                ), id++, WATER_TILE));
         corners.add(TL_WATER_CORNER = new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(5,0), 90
-                ), id++, "TL_WATER_CORNER"));
+                ), id++, WATER_TILE));
         corners.add(TR_WATER_CORNER = new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(5,0), 180
-                ), id++, "TR_WATER_CORNER"));
+                ), id++, WATER_TILE));
         corners.add(BR_WATER_CORNER = new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(5,0), 270
-                ), id++, "BR_WATER_CORNER"));
-
-//        corners.add(BL_WATER_CORNER = new Tile(
-//                ImgFix.buildImg(
-//                        getImgs(0,0,5,0)
-//                ), id++, "BL_WATER_CORNER"));
-//        corners.add(TL_WATER_CORNER = new Tile(
-//                ImgFix.getBuildRotImg(
-//                        getImgs(0,0,5,0), 90, 1),
-//                id++, "TL_WATER_CORNER"));
-//        corners.add(TR_WATER_CORNER = new Tile(
-//                ImgFix.getBuildRotImg(
-//                        getImgs(0,0,5,0), 180, 1),
-//                id++, "TR_WATER_CORNER"));
-//        corners.add(BR_WATER_CORNER = new Tile(
-//                ImgFix.getBuildRotImg(
-//                        getImgs(0,0,5,0), 270, 1),
-//                id++, "BR_WATER_CORNER"));
+                ), id++, WATER_TILE));
 
         beaches.add(T_WATER = new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(6,0), 0
-                ), id++, "T_WATER"));
+                ), id++, WATER_TILE));
         beaches.add(R_WATER = new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(6,0), 90
-                ), id++, "R_WATER"));
+                ), id++, WATER_TILE));
         beaches.add(B_WATER = new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(6,0), 180
-                ), id++, "B_WATER"));
+                ), id++, WATER_TILE));
         beaches.add(L_WATER = new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(6,0), 270
-                ), id++, "L_WATER"));
+                ), id++, WATER_TILE));
 
         islands.add(TL_ISLE = new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(4,0), 0
-                ), id++, "TL_ISLE"));
+                ), id++, WATER_TILE));
         islands.add(TR_ISLE= new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(4,0), 90
-                ), id++, "TR_ISLE"));
+                ), id++, WATER_TILE));
         islands.add(BR_ISLE= new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(4,0), 180
-                ), id++, "BR_ISLE"));
+                ), id++, WATER_TILE));
         islands.add(BL_ISLE= new Tile(
                 ImgFix.getBuildRotImg(
                         getAniSprites(0,0),getSprite(4,0), 270
-                ), id++, "BL_ISLE"));
+                ), id++, WATER_TILE));
 
         tiles.addAll(roadsS);
         tiles.addAll(roadsC);

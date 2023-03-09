@@ -51,9 +51,6 @@ public class Editing extends GameScene implements SceneMethods {
         }
     }
 
-
-
-
     private void drawSelectedTile(Graphics g) {
         if (selectedTile != null && drawSelect) {
             g.drawImage(selectedTile.getSprite(), mouseX, mouseY, 32, 32, null);
