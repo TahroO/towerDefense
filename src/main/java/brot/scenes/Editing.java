@@ -10,15 +10,12 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class Editing extends GameScene implements SceneMethods {
-    private static final int ANIMATION_SPEED = 25;
-    private int[][] lvl;
+     private int[][] lvl;
     private Tile selectedTile;
     private int mouseX, mouseY;
     private boolean drawSelect;
     private ToolBar toolBar;
     private int lastTileX, lastTileY, lastTileId;
-    private int animationIndex;
-    private int tick;
 
     public Editing(Game game) {
         super(game);
@@ -29,26 +26,16 @@ public class Editing extends GameScene implements SceneMethods {
     private void loadDefaultLevel() {
         lvl = LoadSave.getLevelData("new level");
     }
+    public void  update(){
+        updateTick();
+    }
 
     @Override
     public void render(Graphics g) {
-        updateTick();
+
         drawLevel(g);
         toolBar.draw(g);
         drawSelectedTile(g);
-    }
-
-    // Every Frame update animation / change speed of animation
-    // Higher numbers result in slower animation
-    private void updateTick() {
-        tick++;
-        if (tick >= ANIMATION_SPEED) {
-            tick = 0;
-            animationIndex++;
-            if (animationIndex >= 4) {
-                animationIndex = 0;
-            }
-        }
     }
 
     private void drawLevel(Graphics g) {
@@ -64,16 +51,8 @@ public class Editing extends GameScene implements SceneMethods {
         }
     }
 
-    private boolean isAnimation(int spriteId) {
-        return game.getTileManager().isSpriteAnimation(spriteId);
-    }
 
-    private BufferedImage getSprite(int spriteId) {
-        return game.getTileManager().getSprite(spriteId);
-    }
-    private BufferedImage getSprite(int spriteId, int animationIndex) {
-        return game.getTileManager().getAniSprite(spriteId, animationIndex);
-    }
+
 
     private void drawSelectedTile(Graphics g) {
         if (selectedTile != null && drawSelect) {
