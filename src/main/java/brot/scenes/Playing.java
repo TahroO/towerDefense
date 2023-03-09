@@ -2,6 +2,7 @@ package brot.scenes;
 
 import brot.helperMethods.LoadSave;
 import brot.main.Game;
+import brot.managers.EnemyManager;
 import brot.ui.ActionBar;
 
 import java.awt.*;
@@ -13,11 +14,13 @@ public class Playing extends GameScene implements SceneMethods {
     private int[][] lvl;
     private ActionBar bottomBar;
     private int mouseX, mouseY;
+    private EnemyManager enemyManager;
 
     public Playing(Game game) {
         super(game);
         loadDefaultLevel();
         bottomBar = new ActionBar(0, 640, 640, 100, this);
+        enemyManager = new EnemyManager(this);
     }
 
     private void loadDefaultLevel() {
@@ -27,11 +30,15 @@ public class Playing extends GameScene implements SceneMethods {
     public void setLevel(int[][] lvl) {
         this.lvl = lvl;
     }
+    public void update() {
+        enemyManager.update();
+    }
 
     @Override
     public void render(Graphics g) {
         drawLevel(g);
         bottomBar.draw(g);
+        enemyManager.draw(g);
     }
 
     private void drawLevel(Graphics g) {
@@ -51,6 +58,8 @@ public class Playing extends GameScene implements SceneMethods {
     public void mouseClicked(int x, int y) {
         if (y >= 640) {
             bottomBar.mouseClicked(x, y);
+        } else {
+            enemyManager.addEnemy(x, y);
         }
     }
 
