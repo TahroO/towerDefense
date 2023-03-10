@@ -31,6 +31,7 @@ public class ToolBar extends Bar {
         initPathImgs();
         initButtons();
     }
+
     private void initPathImgs() {
         pathStart = LoadSave.getSpriteAtlas().getSubimage(7 * 32, 2 * 32, 32, 32);
         pathEnd = LoadSave.getSpriteAtlas().getSubimage(8 * 32, 2 * 32, 32, 32);
@@ -69,6 +70,7 @@ public class ToolBar extends Bar {
     private void saveLevel() {
         editing.saveLevel();
     }
+
     public void rotateSprite() {
         currentIndex++;
         if (currentIndex >= map.get(currentButton).size()) {
@@ -89,10 +91,10 @@ public class ToolBar extends Bar {
     private void drawButtons(Graphics g) {
         bMenu.draw(g);
         bSave.draw(g);
-        
+
         drawPathButton(g, bPathStart, pathStart);
         drawPathButton(g, bPathEnd, pathEnd);
-        
+
         drawNormalButton(g, bGrass);
         drawNormalButton(g, bWater);
         drawSelectedTile(g);
@@ -168,7 +170,7 @@ public class ToolBar extends Bar {
         } else if (bPathEnd.getBounds().contains(x, y)) {
             selectedTile = new Tile(pathEnd, -2, -2);
             editing.setSelectedTile(selectedTile);
-        }else {
+        } else {
             for (MyButton b : map.keySet()) {
                 if (b.getBounds().contains(x, y)) {
                     selectedTile = map.get(b).get(0);
@@ -246,5 +248,11 @@ public class ToolBar extends Bar {
         for (MyButton b : map.keySet()) {
             b.resetBooleans();
         }
+    }
+    public BufferedImage getStartPathImg() {
+        return pathStart;
+    }
+    public BufferedImage getEndPathImg() {
+        return pathEnd;
     }
 }

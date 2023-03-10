@@ -7,10 +7,6 @@ import brot.managers.EnemyManager;
 import brot.ui.ActionBar;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.logging.Level;
-
-import static brot.helperMethods.Constants.Enemies.ORC;
 
 public class Playing extends GameScene implements SceneMethods {
 
@@ -27,7 +23,7 @@ public class Playing extends GameScene implements SceneMethods {
     }
 
     private void loadDefaultLevel() {
-        lvl = LoadSave.getLevelData("new level");
+        lvl = LoadSave.getLevelData("new_level");
     }
 
     public void setLevel(int[][] lvl) {

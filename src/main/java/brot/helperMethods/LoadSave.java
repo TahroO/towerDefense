@@ -1,5 +1,7 @@
 package brot.helperMethods;
 
+import brot.objects.PathPoint;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -28,6 +30,7 @@ public class LoadSave {
         }
 
     }
+
     public static void createLevel(String name, int[] idArr) {
         File newLevel = new File("src/main/resources/" + name + ".txt");
         if (newLevel.exists()) {
@@ -39,28 +42,36 @@ public class LoadSave {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            writeToFile(newLevel, idArr);
+            writeToFile(newLevel, idArr, new PathPoint(0, 0), new PathPoint(0, 0));
         }
     }
-    private static void writeToFile(File f, int[] idArr) {
+
+    private static void writeToFile(File f, int[] idArr, PathPoint start, PathPoint end) {
         try {
             PrintWriter pw = new PrintWriter(f);
             for (Integer i : idArr) {
                 pw.println(i);
             }
+            pw.println(start.getxCord());
+            pw.println(start.getyCord());
+            pw.println(end.getxCord());
+            pw.println(end.getyCord());
+
             pw.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
-    public static void saveLevel(String name, int[][] idArr) {
+
+    public static void saveLevel(String name, int[][] idArr, PathPoint start, PathPoint end) {
         File levelFile = new File("src/main/resources/" + name + ".txt");
         if (levelFile.exists()) {
-            writeToFile(levelFile, Utils.twoDto1DintArr(idArr));
+            writeToFile(levelFile, Utils.twoDto1DintArr(idArr), start, end);
         } else {
             System.out.println("File: " + name + " does not exits!");
         }
     }
+
     private static ArrayList<Integer> readFromFile(File file) {
         ArrayList<Integer> list = new ArrayList<>();
         try {
@@ -76,13 +87,28 @@ public class LoadSave {
         return list;
     }
 
+    public static ArrayList<PathPoint> getLevelPathPoints(String name) {
+        File lvlFile = new File("src/main/resources/" + name + ".txt");
+        if (lvlFile.exists()) {
+            ArrayList<Integer> list = readFromFile(lvlFile);
+            ArrayList<PathPoint> points = new ArrayList<>();
+            // Starting Position
+            points.add(new PathPoint(list.get(400), list.get(401)));
+            points.add(new PathPoint(list.get(402), list.get(403)));
+            return points;
+        } else {
+            System.out.println("File: " + name + " does not exits!");
+            return null;
+        }
+    }
+
     public static int[][] getLevelData(String name) {
         File lvlFile = new File("src/main/resources/" + name + ".txt");
         if (lvlFile.exists()) {
             ArrayList<Integer> list = readFromFile(lvlFile);
             return Utils.arrayListTo2Dint(list, 20, 20);
         } else {
-            System.out.println("File: " +  name + " does not exits!");
+            System.out.println("File: " + name + " does not exits!");
             return null;
         }
     }
@@ -91,7 +117,6 @@ public class LoadSave {
     // Load int array from file
 
     // Create a new lvl with default values
-
 
 
 }

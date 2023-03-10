@@ -2,12 +2,16 @@ package brot.scenes;
 
 import brot.helperMethods.LoadSave;
 import brot.main.Game;
+import brot.objects.PathPoint;
 import brot.objects.Tile;
 import brot.ui.ToolBar;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import static brot.helperMethods.Constants.Tiles.ROAD_TILE;
 
 public class Editing extends GameScene implements SceneMethods {
      private int[][] lvl;
@@ -16,6 +20,7 @@ public class Editing extends GameScene implements SceneMethods {
     private boolean drawSelect;
     private ToolBar toolBar;
     private int lastTileX, lastTileY, lastTileId;
+    private PathPoint start, end;
 
     public Editing(Game game) {
         super(game);
@@ -25,7 +30,10 @@ public class Editing extends GameScene implements SceneMethods {
     }
 
     private void loadDefaultLevel() {
-        lvl = LoadSave.getLevelData("new level");
+        lvl = LoadSave.getLevelData("new_level");
+        ArrayList<PathPoint> points = LoadSave.getLevelPathPoints("new_level");
+        start = points.get(0);
+        end = points.get(1);
     }
     public void  update(){
         updateTick();
@@ -37,6 +45,18 @@ public class Editing extends GameScene implements SceneMethods {
         drawLevel(g);
         toolBar.draw(g);
         drawSelectedTile(g);
+        drawPathPoints(g);
+    }
+
+    private void drawPathPoints(Graphics g) {
+        if (start != null) {
+            g.drawImage(toolBar.getStartPathImg(), start.getxCord() * 32, start.getyCord() * 32,
+                    32, 32, null);
+        }
+        if (end != null) {
+            g.drawImage(toolBar.getEndPathImg(), end.getxCord() * 32, end.getyCord() * 32,
+                    32, 32, null);
+        }
     }
 
     private void drawLevel(Graphics g) {
@@ -59,7 +79,7 @@ public class Editing extends GameScene implements SceneMethods {
     }
 
     public void saveLevel() {
-        LoadSave.saveLevel("new level", lvl);
+        LoadSave.saveLevel("new_level", lvl, start, end);
         game.getPlaying().setLevel(lvl);
     }
 
@@ -73,16 +93,29 @@ public class Editing extends GameScene implements SceneMethods {
         if (selectedTile != null) {
             int tileX = x / 32;
             int tileY = y / 32;
-            // Check if we are still on the same tile or the tile is already placed
-            if (lastTileX == tileX && lastTileY == tileY && lastTileId == selectedTile.getId()) {
-                return;
+            if (selectedTile.getId() >= 0) {
+
+                // Check if we are still on the same tile or the tile is already placed
+                if (lastTileX == tileX && lastTileY == tileY && lastTileId == selectedTile.getId()) {
+                    return;
+                } else {
+                    lastTileX = tileX;
+                    lastTileY = tileY;
+                    lastTileId = selectedTile.getId();
+                }
+                // Change tile inside Array
+                lvl[tileY][tileX] = selectedTile.getId();
             } else {
-                lastTileX = tileX;
-                lastTileY = tileY;
-                lastTileId = selectedTile.getId();
+                // Start and endpoint
+                int id = lvl[tileY][tileX];
+                if (game.getTileManager().getTile(id).getTileType() == ROAD_TILE) {
+                    if (selectedTile.getId() == -1) {
+                        start = new PathPoint(tileX, tileY);
+                    } else {
+                        end = new PathPoint(tileX, tileY);
+                    }
+                }
             }
-            // Change tile inside Array
-            lvl[tileY][tileX] = selectedTile.getId();
         }
     }
 
