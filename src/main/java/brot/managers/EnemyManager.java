@@ -4,7 +4,6 @@ import brot.enemies.*;
 import brot.helperMethods.LoadSave;
 import brot.scenes.Playing;
 
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -22,9 +21,9 @@ public class EnemyManager {
         this.playing = playing;
         enemyImgs = new BufferedImage[4];
         addEnemy(1 * 32, 18 * 32, ORC);
-        addEnemy(18 * 32, 18 * 32, BAT);
-        addEnemy(1 * 32, 1 * 32, KNIGHT);
-        addEnemy(18 * 32, 1 * 32, WOLF);
+        addEnemy(2 * 32, 18 * 32, BAT);
+        addEnemy(3 * 32, 18 * 32, KNIGHT);
+        addEnemy(4 * 32, 18 * 32, WOLF);
         loadEnemyImgs();
     }
 
@@ -113,7 +112,6 @@ public class EnemyManager {
         e.setPos(xCord * 32, yCord * 32);
     }
 
-
     private boolean isAtEnd(Enemy e) {
         return false;
     }
@@ -155,11 +153,8 @@ public class EnemyManager {
                 enemies.add(new Wolf(x, y, 0));
                 break;
         }
-
-
-
-
     }
+
     public void draw(Graphics g) {
         for (Enemy e : enemies) {
             drawEnemy(e, g);
@@ -169,4 +164,5 @@ public class EnemyManager {
     private void drawEnemy(Enemy e, Graphics g) {
             g.drawImage(enemyImgs[e.getEnemyType()], (int)e.getX(), (int)e.getY(), null );
     }
+
 }

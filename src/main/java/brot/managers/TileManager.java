@@ -4,7 +4,6 @@ import brot.helperMethods.ImgFix;
 import brot.helperMethods.LoadSave;
 import brot.objects.Tile;
 
-
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -44,13 +43,11 @@ public class TileManager {
         return islands;
     }
 
-
-
-
     public TileManager() {
         loadAtlas();
         createTiles();
     }
+
     public void createTiles() {
         int id = 0;
         tiles.add(GRASS = new Tile(getSprite(9,0), id++, GRASS_TILE));
@@ -125,9 +122,11 @@ public class TileManager {
         return new BufferedImage[] {getSprite(firstX, firstY),
         getSprite(secondX, secondY) };
     }
+
     private void loadAtlas() {
         atlas = LoadSave.getSpriteAtlas();
     }
+
     public Tile getTile(int id) {
         return tiles.get(id);
     }
@@ -135,9 +134,11 @@ public class TileManager {
     public BufferedImage getSprite(int id) {
         return tiles.get(id).getSprite();
     }
+
     public BufferedImage getAniSprite(int id, int animationIndex) {
         return tiles.get(id).getSprite(animationIndex);
     }
+
     public BufferedImage[] getAniSprites(int xCord, int yCord) {
         BufferedImage[] arr = new BufferedImage[4];
         for (int i = 0; i < 4; i++) {
@@ -149,6 +150,7 @@ public class TileManager {
     private BufferedImage getSprite(int xCord, int  yCord) {
         return atlas.getSubimage(xCord * 32,yCord * 32,32,32);
     }
+
     public boolean isSpriteAnimation(int spriteId) {
         return tiles.get(spriteId).isAnimation();
     }
