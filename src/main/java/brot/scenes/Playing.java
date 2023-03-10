@@ -1,5 +1,6 @@
 package brot.scenes;
 
+import brot.enemies.Orc;
 import brot.helperMethods.LoadSave;
 import brot.main.Game;
 import brot.managers.EnemyManager;
@@ -8,6 +9,8 @@ import brot.ui.ActionBar;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
+
+import static brot.helperMethods.Constants.Enemies.ORC;
 
 public class Playing extends GameScene implements SceneMethods {
 
@@ -72,7 +75,6 @@ public class Playing extends GameScene implements SceneMethods {
         if (y >= 640) {
             bottomBar.mouseClicked(x, y);
         } else {
-            enemyManager.addEnemy(x, y);
         }
     }
 

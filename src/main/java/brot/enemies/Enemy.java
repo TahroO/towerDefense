@@ -3,7 +3,7 @@ package brot.enemies;
 import java.awt.*;
 import static brot.helperMethods.Constants.Direction.*;
 
-public class Enemy {
+public abstract class Enemy {
     // Using float to be able to get half a pixel movement speed - more control
     private float x, y;
     // HitBox rectangle
@@ -19,7 +19,8 @@ public class Enemy {
         this.iD = iD;
         this.enemyType = enemyType;
         bounds = new Rectangle((int) x, (int) y, 32, 32);
-        lastDir = RIGHT;
+        // -1 for starting point / first decision where to go
+        lastDir = -1;
     }
 
     // Move enemy
