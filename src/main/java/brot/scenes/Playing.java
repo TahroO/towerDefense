@@ -1,29 +1,34 @@
 package brot.scenes;
 
-import brot.enemies.Orc;
 import brot.helperMethods.LoadSave;
 import brot.main.Game;
 import brot.managers.EnemyManager;
+import brot.objects.PathPoint;
 import brot.ui.ActionBar;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Playing extends GameScene implements SceneMethods {
 
     private int[][] lvl;
-    private ActionBar bottomBar;
+    private ActionBar actionBar;
     private int mouseX, mouseY;
     private EnemyManager enemyManager;
+    private PathPoint start, end;
 
     public Playing(Game game) {
         super(game);
         loadDefaultLevel();
-        bottomBar = new ActionBar(0, 640, 640, 100, this);
-        enemyManager = new EnemyManager(this);
+        actionBar = new ActionBar(0, 640, 640, 160, this);
+        enemyManager = new EnemyManager(this, start, end);
     }
 
     private void loadDefaultLevel() {
         lvl = LoadSave.getLevelData("new_level");
+        ArrayList<PathPoint> points = LoadSave.getLevelPathPoints("new_level");
+        start = points.get(0);
+        end = points.get(1);
     }
 
     public void setLevel(int[][] lvl) {
@@ -37,7 +42,7 @@ public class Playing extends GameScene implements SceneMethods {
     @Override
     public void render(Graphics g) {
         drawLevel(g);
-        bottomBar.draw(g);
+        actionBar.draw(g);
         enemyManager.draw(g);
     }
 
@@ -69,7 +74,7 @@ public class Playing extends GameScene implements SceneMethods {
     @Override
     public void mouseClicked(int x, int y) {
         if (y >= 640) {
-            bottomBar.mouseClicked(x, y);
+            actionBar.mouseClicked(x, y);
         } else {
         }
     }
@@ -77,7 +82,7 @@ public class Playing extends GameScene implements SceneMethods {
     @Override
     public void mouseMoved(int x, int y) {
         if (y >= 640) {
-            bottomBar.mouseMoved(x, y);
+            actionBar.mouseMoved(x, y);
         } else {
             // Make tiles snap to position
             mouseX = (x / 32) * 32;
@@ -88,13 +93,13 @@ public class Playing extends GameScene implements SceneMethods {
     @Override
     public void mousePressed(int x, int y) {
         if (y >= 640) {
-            bottomBar.mousePressed(x, y);
+            actionBar.mousePressed(x, y);
         }
     }
 
     @Override
     public void mouseReleased(int x, int y) {
-        bottomBar.mouseReleased(x, y);
+        actionBar.mouseReleased(x, y);
     }
 
     @Override

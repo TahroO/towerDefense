@@ -2,6 +2,7 @@ package brot.managers;
 
 import brot.enemies.*;
 import brot.helperMethods.LoadSave;
+import brot.objects.PathPoint;
 import brot.scenes.Playing;
 
 import java.awt.*;
@@ -17,13 +18,16 @@ public class EnemyManager {
     private BufferedImage[] enemyImgs;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private float speed = 0.5f;
-    public EnemyManager(Playing playing) {
+    private PathPoint start, end;
+    public EnemyManager(Playing playing, PathPoint start, PathPoint end) {
         this.playing = playing;
         enemyImgs = new BufferedImage[4];
-        addEnemy(1 * 32, 18 * 32, ORC);
-        addEnemy(2 * 32, 18 * 32, BAT);
-        addEnemy(3 * 32, 18 * 32, KNIGHT);
-        addEnemy(4 * 32, 18 * 32, WOLF);
+        this.start = start;
+        this.end= end;
+        addEnemy(ORC);
+        addEnemy(BAT);
+        addEnemy(KNIGHT);
+        addEnemy(WOLF);
         loadEnemyImgs();
     }
 
@@ -56,6 +60,7 @@ public class EnemyManager {
             e.move(speed, e.getLastDir());
         } else if (isAtEnd(e)) {
             // Reached the end
+            System.out.println("Lives Lost!");
         } else {
             // Find new direction
             setNewDirectionAndMove(e);
@@ -68,6 +73,9 @@ public class EnemyManager {
         int xCord = (int)(e.getX() / 32);
         int yCord = (int)(e.getY() / 32);
         fixEnemyOffsetTile(e, dir, xCord, yCord);
+        if (isAtEnd(e)) {
+            return;
+        }
 
         if (dir == LEFT || dir == RIGHT) {
             int newY = (int)(e.getY() + getSpeedAndHeight(UP));
@@ -113,6 +121,11 @@ public class EnemyManager {
     }
 
     private boolean isAtEnd(Enemy e) {
+        if (e.getX() == end.getxCord() * 32) {
+            if (e.getY() == end.getyCord() * 32) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -138,7 +151,9 @@ public class EnemyManager {
         return 0;
     }
 
-    public void addEnemy(int x, int y, int enemyType) {
+    public void addEnemy(int enemyType) {
+        int x = start.getxCord() * 32;
+        int y = start.getyCord() * 32;
         switch (enemyType) {
             case ORC:
                 enemies.add(new Orc(x, y, 0));
