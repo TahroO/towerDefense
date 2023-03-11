@@ -1,8 +1,10 @@
 package brot.scenes;
 
+import brot.enemies.Enemy;
 import brot.helperMethods.LoadSave;
 import brot.main.Game;
 import brot.managers.EnemyManager;
+import brot.managers.ProjectileManager;
 import brot.managers.TowerManager;
 import brot.objects.PathPoint;
 import brot.objects.Tower;
@@ -21,6 +23,7 @@ public class Playing extends GameScene implements SceneMethods {
     private int mouseX, mouseY;
     private EnemyManager enemyManager;
     private TowerManager towerManager;
+    private ProjectileManager projectileManager;
     private Tower selectedTower;
     private PathPoint start, end;
 
@@ -30,6 +33,7 @@ public class Playing extends GameScene implements SceneMethods {
         actionBar = new ActionBar(0, 640, 640, 160, this);
         enemyManager = new EnemyManager(this, start, end);
         towerManager = new TowerManager(this);
+        projectileManager = new ProjectileManager(this);
     }
 
     private void loadDefaultLevel() {
@@ -47,6 +51,7 @@ public class Playing extends GameScene implements SceneMethods {
         updateTick();
         enemyManager.update();
         towerManager.update();
+        projectileManager.update();
     }
 
     public void setSelectedTower(Tower selectedTower) {
@@ -59,6 +64,7 @@ public class Playing extends GameScene implements SceneMethods {
         actionBar.draw(g);
         enemyManager.draw(g);
         towerManager.draw(g);
+        projectileManager.draw(g);
         drawSelectedTower(g);
         drawHighlight(g);
 
@@ -170,4 +176,7 @@ public class Playing extends GameScene implements SceneMethods {
         return enemyManager;
     }
 
+    public void shootEnemy(Tower t, Enemy e) {
+        projectileManager.newProjectile(t, e);
+    }
 }

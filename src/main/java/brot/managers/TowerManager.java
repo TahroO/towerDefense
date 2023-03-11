@@ -32,22 +32,26 @@ public class TowerManager {
     }
 
     public void update() {
-        attackEnemyIfClose();
+        for (Tower t : towers) {
+            t.update();
+            attackEnemyIfClose(t);
+        }
     }
 
-    private void attackEnemyIfClose() {
-        for (Tower t : towers) {
+    private void attackEnemyIfClose(Tower t) {
             for (Enemy e : playing.getEnemyManager().getEnemies()) {
                 if (e.isAlive()) {
                     if (isEnemyInRange(t, e)) {
-                        // Tower shoot enemy
-                        e.hurt(1);
+                        if (t.isCooldownOver()) {
+                            // Tower shoot enemy
+                            playing.shootEnemy(t, e);
+                            t.resetCooldown();
+                        }
                     }
                 } else {
                     // Do not shoot
                 }
             }
-        }
     }
 
     private boolean isEnemyInRange(Tower t, Enemy e) {

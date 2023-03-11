@@ -39,7 +39,7 @@ public class Constants {
             }
             return "";
         }
-        public static float getStartDmg(int towerType) {
+        public static int getStartDmg(int towerType) {
             switch (towerType) {
                 case CANNON:
                     return 25;
