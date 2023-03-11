@@ -7,13 +7,14 @@ import static brot.helperMethods.Constants.Direction.*;
 
 public abstract class Enemy {
     // Using float to be able to get half a pixel movement speed - more control
-    private float x, y;
+    protected float x, y;
     // HitBox rectangle
-    private Rectangle bounds;
-    private int health;
-    private int iD;
-    private int enemyType;
-    private int lastDir;
+    protected Rectangle bounds;
+    protected int health;
+    protected int maxHealth;
+    protected int iD;
+    protected int enemyType;
+    protected int lastDir;
 
     public Enemy(float x, float y, int iD, int enemyType) {
         this.x = x;
@@ -23,9 +24,11 @@ public abstract class Enemy {
         bounds = new Rectangle((int) x, (int) y, 32, 32);
         // -1 for starting point / first decision where to go
         lastDir = -1;
+        setStartHealth();
     }
-    protected void setStartHealth() {
+    private void setStartHealth() {
         health = Constants.Enemies.getStartHealth(enemyType);
+        maxHealth = health;
     }
 
     // Move enemy
@@ -51,6 +54,10 @@ public abstract class Enemy {
         // For position fix only / do not use for move
         this.x = x;
         this.y = y;
+    }
+    // Dividing health through maxHealth -> reducing healthBar width
+    public float getHealthBarFloat() {
+        return health / (float)maxHealth;
     }
     public float getX() {
         return x;

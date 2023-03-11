@@ -45,8 +45,16 @@ public class ActionBar extends Bar {
             g.drawString("ID: " + displayedTower.getiD(), 490, 675);
             // Draw a border around selected tower
             drawDisplayedTowerBorder(g);
+            drawDisplayTowerRange(g);
             
         }
+    }
+
+    private void drawDisplayTowerRange(Graphics g) {
+        g.setColor(Color.white);
+        g.drawOval(displayedTower.getX() + 16 - (int)displayedTower.getRange() / 2,
+                displayedTower.getY() + 16 - (int)displayedTower.getRange() / 2,
+                (int)displayedTower.getRange(), (int)displayedTower.getRange());
     }
 
     private void drawDisplayedTowerBorder(Graphics g) {
