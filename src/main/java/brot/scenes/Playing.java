@@ -9,6 +9,7 @@ import brot.objects.Tower;
 import brot.ui.ActionBar;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import static brot.helperMethods.Constants.Tiles.GRASS_TILE;
@@ -59,7 +60,13 @@ public class Playing extends GameScene implements SceneMethods {
         enemyManager.draw(g);
         towerManager.draw(g);
         drawSelectedTower(g);
+        drawHighlight(g);
 
+    }
+
+    private void drawHighlight(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.drawRect(mouseX, mouseY, 32, 32);
     }
 
     private void drawSelectedTower(Graphics g) {
@@ -122,6 +129,11 @@ public class Playing extends GameScene implements SceneMethods {
         int iD = lvl[y / 32][x / 32];
         int tileType = game.getTileManager().getTile(iD).getTileType();
         return tileType == GRASS_TILE;
+    }
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            selectedTower = null;
+        }
     }
 
     @Override

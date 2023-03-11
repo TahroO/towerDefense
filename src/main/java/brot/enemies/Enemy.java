@@ -1,5 +1,7 @@
 package brot.enemies;
 
+import brot.helperMethods.Constants;
+
 import java.awt.*;
 import static brot.helperMethods.Constants.Direction.*;
 
@@ -21,6 +23,9 @@ public abstract class Enemy {
         bounds = new Rectangle((int) x, (int) y, 32, 32);
         // -1 for starting point / first decision where to go
         lastDir = -1;
+    }
+    protected void setStartHealth() {
+        health = Constants.Enemies.getStartHealth(enemyType);
     }
 
     // Move enemy
