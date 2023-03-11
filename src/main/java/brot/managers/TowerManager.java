@@ -39,6 +39,16 @@ public class TowerManager {
             g.drawImage(towerImgs[t.getTowerType()], t.getX(), t.getY(), null);
         }
     }
+    // Check if there is already a tower on this position
+    public Tower getTowerAt(int x, int y) {
+        for (Tower t : towers) {
+            if (t.getX() == x) {
+                if (t.getY() == y) {
+                    return t;
+                }
+            }
+        } return null;
+    }
 
     public BufferedImage[] getTowerImgs() {
         return towerImgs;

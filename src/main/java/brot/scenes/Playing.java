@@ -99,12 +99,22 @@ public class Playing extends GameScene implements SceneMethods {
             actionBar.mouseClicked(x, y);
         } else {
             if (selectedTower != null) {
-                if (isTileGrass(mouseX, mouseY)){
-                    towerManager.addTower(selectedTower, mouseX, mouseY);
-                    selectedTower = null;
+                if (isTileGrass(mouseX, mouseY)) {
+                    // Check if the tile is free to place a tower
+                    if (getTowerAt(mouseX, mouseY) == null) {
+                        towerManager.addTower(selectedTower, mouseX, mouseY);
+                        selectedTower = null;
+                    }
                 }
+            } else {
+                // get tower if exists on xy
+                Tower t = getTowerAt(mouseX, mouseY);
+                    actionBar.displayTower(t);
             }
         }
+    }
+    private Tower getTowerAt(int x, int y) {
+        return towerManager.getTowerAt(x, y);
     }
 
     // Place towers only on green

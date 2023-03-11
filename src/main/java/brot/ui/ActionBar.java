@@ -1,5 +1,6 @@
 package brot.ui;
 
+import brot.helperMethods.Constants;
 import brot.objects.Tower;
 import brot.scenes.Playing;
 
@@ -13,6 +14,7 @@ public class ActionBar extends Bar {
     private MyButton bMenu;
     private MyButton[] towerButtons;
     private Tower selectedTower;
+    private Tower displayedTower;
 
     public ActionBar(int x, int y, int width, int height, Playing playing) {
         super(x, y, width, height);
@@ -26,8 +28,27 @@ public class ActionBar extends Bar {
         g.fillRect(x, y, width, height);
         //Buttons
         drawButtons(g);
+        //displayed tower
+        drawDisplayedTower(g);
     }
 
+    private void drawDisplayedTower(Graphics g) {
+        if (displayedTower != null) {
+            g.setColor(Color.gray);
+            g.fillRect(410, 645, 220, 85);
+            g.setColor(Color.BLACK);
+            g.drawRect(410, 645, 220, 85);
+            g.drawRect(420, 650, 50, 50);
+            g.drawImage(playing.getTowerManager().getTowerImgs()[displayedTower.getTowerType()], 420, 650, 50, 50, null );
+            g.setFont(new Font("LucidaSans", Font.BOLD, 15));
+            g.drawString("" + Constants.Towers.getName(displayedTower.getTowerType()), 490, 660);
+            g.drawString("ID: " + displayedTower.getiD(), 490, 675);
+        }
+    }
+
+    public void displayTower(Tower tower) {
+        displayedTower = tower;
+    }
     private void initButtons() {
         bMenu = new MyButton("Menu", 2, 642, 100, 30);
         towerButtons = new MyButton[3];
