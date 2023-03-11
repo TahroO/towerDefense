@@ -3,16 +3,16 @@ package brot.helperMethods;
 public class Constants {
     public static class Projectiles {
         public static final int ARROW = 0;
-        public static final int BOMB = 1;
-        public static final int CHAINS = 2;
+        public static final int BOMB = 2;
+        public static final int CHAINS = 1;
         public static float getSpeed(int type) {
             switch (type) {
                 case ARROW:
-                    return 3f;
+                    return 2f;
                 case BOMB:
                     return 1f;
                 case CHAINS:
-                    return 2f;
+                    return 1.5f;
             }
             return 0f;
         }
@@ -44,7 +44,7 @@ public class Constants {
                 case CANNON:
                     return 25;
                 case ARCHER:
-                    return 15;
+                    return 1;
                 case WIZARD:
                     return 5;
             }
@@ -65,11 +65,11 @@ public class Constants {
         public static float getDefaultCooldown(int towerType) {
             switch (towerType) {
                 case CANNON:
-                    return 10;
+                    return 20;
                 case ARCHER:
                     return 10;
                 case WIZARD:
-                    return 10;
+                    return 15;
             }
             return 0;
         }

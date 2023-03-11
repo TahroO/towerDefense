@@ -33,11 +33,11 @@ public class ProjectileManager {
     }
     public void newProjectile(Tower t, Enemy e) {
         int type = getProjType(t);
-        int xDist = (int)Math.abs(t.getX() - e.getX());
-        int yDist = (int)Math.abs(t.getY() - e.getY());
-        int totDist = xDist + yDist;
+        int xDist = (int)(t.getX() - e.getX());
+        int yDist = (int)(t.getY() - e.getY());
+        int totDist = Math.abs(xDist) + Math.abs(yDist);
 
-        float xPer = (float)xDist / totDist;
+        float xPer = (float)Math.abs(xDist) / Math.abs(totDist);
 
         float xSpeed = xPer * Constants.Projectiles.getSpeed(type);
         float ySpeed = Constants.Projectiles.getSpeed(type) - xSpeed;
@@ -48,7 +48,12 @@ public class ProjectileManager {
                 ySpeed *= -1;
             }
         }
-        projectiles.add(new Projectile(t.getX() + 16, t.getY() + 16, xSpeed, ySpeed, t.getDmg(), proj_id++, type));
+        float arcValue = (float) Math.atan(yDist / (float) xDist);
+        float rotate = (float) Math.toDegrees(arcValue);
+        if (yDist < 0) {
+            rotate += 180;
+        }
+        projectiles.add(new Projectile(t.getX() + 16, t.getY() + 16, xSpeed, ySpeed, t.getDmg(), rotate, proj_id++, type));
     }
 
     private int getProjType(Tower t) {
@@ -88,9 +93,16 @@ public class ProjectileManager {
     }
 
     public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+
         for (Projectile p : projectiles) {
             if (p.isActive()) {
-                g.drawImage(proj_imgs[p.getProjectileType()], (int)p.getPos().x, (int)p.getPos().y, null );
+                g2d.translate(p.getPos().x, p.getPos().y);
+                g2d.rotate(Math.toRadians(p.getRotation()));
+                g2d.drawImage(proj_imgs[p.getProjectileType()],-16, -16, null );
+                g2d.rotate(-Math.toRadians(p.getRotation()));
+                g2d.translate(-p.getPos().x, -p.getPos().y);
+
 
             }
         }
