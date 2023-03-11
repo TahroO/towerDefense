@@ -1,5 +1,6 @@
 package brot.managers;
 
+import brot.enemies.Enemy;
 import brot.helperMethods.Constants;
 import brot.helperMethods.LoadSave;
 import brot.objects.Tower;
@@ -31,7 +32,27 @@ public class TowerManager {
     }
 
     public void update() {
+        attackEnemyIfClose();
+    }
 
+    private void attackEnemyIfClose() {
+        for (Tower t : towers) {
+            for (Enemy e : playing.getEnemyManager().getEnemies()) {
+                if (e.isAlive()) {
+                    if (isEnemyInRange(t, e)) {
+                        // Tower shoot enemy
+                        e.hurt(1);
+                    }
+                } else {
+                    // Do not shoot
+                }
+            }
+        }
+    }
+
+    private boolean isEnemyInRange(Tower t, Enemy e) {
+        int range = brot.helperMethods.Utils.getHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
+        return range < t.getRange();
     }
 
     public void draw(Graphics g) {
@@ -39,6 +60,7 @@ public class TowerManager {
             g.drawImage(towerImgs[t.getTowerType()], t.getX(), t.getY(), null);
         }
     }
+
     // Check if there is already a tower on this position
     public Tower getTowerAt(int x, int y) {
         for (Tower t : towers) {
@@ -47,7 +69,8 @@ public class TowerManager {
                     return t;
                 }
             }
-        } return null;
+        }
+        return null;
     }
 
     public BufferedImage[] getTowerImgs() {

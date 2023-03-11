@@ -15,6 +15,7 @@ public abstract class Enemy {
     protected int iD;
     protected int enemyType;
     protected int lastDir;
+    protected boolean alive = true;
 
     public Enemy(float x, float y, int iD, int enemyType) {
         this.x = x;
@@ -29,6 +30,13 @@ public abstract class Enemy {
     private void setStartHealth() {
         health = Constants.Enemies.getStartHealth(enemyType);
         maxHealth = health;
+    }
+
+    public void hurt(int dmg) {
+        this.health -= dmg;
+        if (health <=0) {
+            alive = false;
+        }
     }
 
     // Move enemy
@@ -84,6 +92,10 @@ public abstract class Enemy {
     }
     public int getLastDir() {
         return lastDir;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 
 }
