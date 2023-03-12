@@ -99,7 +99,7 @@ public class ProjectileManager {
 
                 }
             }
-        }if (drawExplo) {
+        } if (drawExplo) {
             exploTick++;
             if (exploTick >= 12) {
                 exploTick = 0;
@@ -129,7 +129,8 @@ public class ProjectileManager {
             g2d.drawImage(explo_imgs[i], 300 + i * 32, 300, null);
         }
 
-        for (Projectile p : projectiles) {
+        for (int i = 0; i < projectiles.size(); i++) {
+            Projectile p = projectiles.get(i);
             if (p.isActive()) {
                 if(p.getProjectileType() == ARROW) {
                     g2d.translate(p.getPos().x, p.getPos().y);
