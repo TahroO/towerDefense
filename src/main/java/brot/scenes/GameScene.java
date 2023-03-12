@@ -31,7 +31,7 @@ public class GameScene {
         if (tick >= ANIMATION_SPEED) {
             tick = 0;
             animationIndex = animationIndex == 3 ? 0 : animationIndex + 1;
-            System.out.println("updateTick: " + Thread.currentThread().getName());
+//            System.out.println("updateTick: " + Thread.currentThread().getName());
         }
     }
     protected BufferedImage getSprite(int spriteId) {

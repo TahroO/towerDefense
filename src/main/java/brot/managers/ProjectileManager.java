@@ -147,7 +147,7 @@ public class ProjectileManager {
     private void drawExplosion(Graphics2D g2d) {
         for (Explosion e : explosions) {
             if (e.getExploIndex() < 7) {
-                g2d.drawImage(explo_imgs[e.getExploIndex()],(int)e.getPos().x,(int)e.getPos().y, null);
+                g2d.drawImage(explo_imgs[e.getExploIndex()],(int)e.getPos().x -16,(int)e.getPos().y -16, null);
             }
         }
     }
