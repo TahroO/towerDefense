@@ -8,11 +8,11 @@ public class Constants {
         public static float getSpeed(int type) {
             switch (type) {
                 case ARROW:
-                    return 2f;
+                    return 8f;
                 case BOMB:
-                    return 1f;
+                    return 4f;
                 case CHAINS:
-                    return 1.5f;
+                    return 6f;
             }
             return 0f;
         }
@@ -42,11 +42,11 @@ public class Constants {
         public static int getStartDmg(int towerType) {
             switch (towerType) {
                 case CANNON:
-                    return 10;
+                    return 15;
                 case ARCHER:
-                    return 2;
-                case WIZARD:
                     return 5;
+                case WIZARD:
+                    return 0;
             }
             return 0;
         }
@@ -65,11 +65,11 @@ public class Constants {
         public static float getDefaultCooldown(int towerType) {
             switch (towerType) {
                 case CANNON:
-                    return 20;
+                    return 120;
                 case ARCHER:
-                    return 10;
+                    return 25;
                 case WIZARD:
-                    return 15;
+                    return 40;
             }
             return 0;
         }

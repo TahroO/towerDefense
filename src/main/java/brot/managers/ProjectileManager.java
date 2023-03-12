@@ -97,6 +97,7 @@ public class ProjectileManager {
                     p.setActive(false);
                     if (p.getProjectileType() == BOMB) {
                         explosions.add(new Explosion(p.getPos()));
+                        explodeOnEnemies(p);
                     }
                 } else {
 
@@ -105,15 +106,36 @@ public class ProjectileManager {
         }
 
         for (Explosion e : explosions) {
-            e.update();
+            if (e.getExploIndex() < 7) {
+                e.update();
+            }
+        }
+    }
+
+    private void explodeOnEnemies(Projectile p) {
+        for (Enemy e : playing.getEnemyManager().getEnemies()) {
+            if (e.isAlive()) {
+                float radius = 40.0f;
+                float xDist = Math.abs(p.getPos().x - e.getX());
+                float yDist = Math.abs(p.getPos().y - e.getY());
+                float realDist = (float) Math.hypot(xDist, yDist);
+                if (realDist <= radius) {
+                    e.hurt(p.getDmg());
+                }
+            }
         }
     }
 
     private boolean isProjHittingEnemy(Projectile p) {
         for (Enemy e : playing.getEnemyManager().getEnemies()) {
-            if (e.getBounds().contains(p.getPos())) {
-                e.hurt(p.getDmg());
-                return true;
+            if (e.isAlive()) {
+                if (e.getBounds().contains(p.getPos())) {
+                    e.hurt(p.getDmg());
+                    if (p.getProjectileType() == CHAINS) {
+                        e.slow();
+                    }
+                    return true;
+                }
             }
         }
         return false;
@@ -147,27 +169,31 @@ public class ProjectileManager {
     private void drawExplosion(Graphics2D g2d) {
         for (Explosion e : explosions) {
             if (e.getExploIndex() < 7) {
-                g2d.drawImage(explo_imgs[e.getExploIndex()],(int)e.getPos().x -16,(int)e.getPos().y -16, null);
+                g2d.drawImage(explo_imgs[e.getExploIndex()], (int) e.getPos().x - 16, (int) e.getPos().y - 16, null);
             }
         }
     }
+
     public class Explosion {
         private Point2D.Float pos;
         private int exploTick = 0, exploIndex = 0;
+
         public Explosion(Point2D.Float pos) {
             this.pos = pos;
         }
+
         public void update() {
-                exploTick++;
-                if (exploTick >= 12) {
-                    exploTick = 0;
-                    exploIndex++;
-                    }
-                }
+            exploTick++;
+            if (exploTick >= 12) {
+                exploTick = 0;
+                exploIndex++;
+            }
+        }
 
         public int getExploIndex() {
             return exploIndex;
         }
+
         public Point2D.Float getPos() {
             return pos;
         }
