@@ -3,8 +3,8 @@ package brot.helperMethods;
 public class Constants {
     public static class Projectiles {
         public static final int ARROW = 0;
-        public static final int BOMB = 2;
         public static final int CHAINS = 1;
+        public static final int BOMB = 2;
         public static float getSpeed(int type) {
             switch (type) {
                 case ARROW:
@@ -42,9 +42,9 @@ public class Constants {
         public static int getStartDmg(int towerType) {
             switch (towerType) {
                 case CANNON:
-                    return 25;
+                    return 10;
                 case ARCHER:
-                    return 1;
+                    return 2;
                 case WIZARD:
                     return 5;
             }
@@ -53,9 +53,9 @@ public class Constants {
         public static float getDefaultRange(int towerType) {
             switch (towerType) {
                 case CANNON:
-                    return 100;
+                    return 75;
                 case ARCHER:
-                    return 100;
+                    return 115;
                 case WIZARD:
                     return 100;
             }
@@ -97,13 +97,13 @@ public class Constants {
         public static int getStartHealth(int enemyType) {
             switch (enemyType) {
                 case ORC:
-                    return 100;
+                    return 150;
                 case BAT:
                     return 60;
                 case KNIGHT:
                     return 250;
                 case WOLF:
-                    return 85;
+                    return 90;
             }
             return 0;
         }
