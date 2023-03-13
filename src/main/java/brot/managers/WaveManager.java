@@ -50,6 +50,7 @@ public class WaveManager {
     }
 
     private void createWaves() {
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(4))));
         waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0,1,1,3))));
         waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1,1,0,0,0,0,3,3,2,2))));
         waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,3,3,0,0,0,1,1,3,0,0,0,0,0,0))));

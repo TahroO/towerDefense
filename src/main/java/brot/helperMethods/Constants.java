@@ -99,6 +99,7 @@ public class Constants {
         public static final int BAT = 1;
         public static final int KNIGHT = 2;
         public static final int WOLF = 3;
+        public static final int BOSS = 4;
         public static int getReward(int enemyType) {
             switch (enemyType) {
                 case ORC:
@@ -109,6 +110,8 @@ public class Constants {
                     return 10;
                 case WOLF:
                     return 5;
+                case BOSS:
+                    return 50;
             }
             return 0;
         }
@@ -124,6 +127,8 @@ public class Constants {
                     return 0.4f;
                 case WOLF:
                     return 0.75f;
+                case BOSS:
+                    return 0.2f;
             }
             return 0f;
         }
@@ -138,6 +143,8 @@ public class Constants {
                     return 350;
                 case WOLF:
                     return 100;
+                case BOSS:
+                    return 1000;
             }
             return 0;
         }

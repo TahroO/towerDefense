@@ -23,7 +23,7 @@ public class EnemyManager {
 
     public EnemyManager(Playing playing, PathPoint start, PathPoint end) {
         this.playing = playing;
-        enemyImgs = new BufferedImage[4];
+        enemyImgs = new BufferedImage[5];
         this.start = start;
         this.end = end;
         loadEffectImg();
@@ -44,6 +44,7 @@ public class EnemyManager {
         for (int i = 0; i < 4; i++) {
             enemyImgs[i] = atlas.getSubimage(i * 32, 32, 32, 32);
         }
+        enemyImgs[4] = atlas.getSubimage(0, 32 * 3, 32, 32);
     }
 
     public void update() {
@@ -183,6 +184,8 @@ public class EnemyManager {
             case WOLF:
                 enemies.add(new Wolf(x, y, 0, this));
                 break;
+            case BOSS:
+                enemies.add(new Boss(x, y, 0, this));
         }
     }
 

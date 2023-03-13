@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class LoadSave {
     public static BufferedImage getSpriteAtlas() {
         BufferedImage img = null;
-        InputStream is = LoadSave.class.getResourceAsStream("/spriteatlas.png");
+        InputStream is = LoadSave.class.getResourceAsStream("/spriteatlas-boss.png");
         try {
             img = ImageIO.read(is);
         } catch (IOException e) {
