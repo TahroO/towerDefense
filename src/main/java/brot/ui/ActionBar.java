@@ -226,4 +226,8 @@ public class ActionBar extends Bar {
     public void payForTower(int towerType) {
         this.gold -= Constants.Towers.getTowerCost(towerType);
     }
+
+    public void addGold(int reward) {
+        this.gold += reward;
+    }
 }

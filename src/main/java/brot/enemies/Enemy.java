@@ -1,11 +1,13 @@
 package brot.enemies;
 
 import brot.helperMethods.Constants;
+import brot.managers.EnemyManager;
 
 import java.awt.*;
 import static brot.helperMethods.Constants.Direction.*;
 
 public abstract class Enemy {
+    protected EnemyManager enemyManager;
     // Using float to be able to get half a pixel movement speed - more control
     protected float x, y;
     // HitBox rectangle
@@ -19,11 +21,12 @@ public abstract class Enemy {
     protected int slowTickLimit = 120;
     protected int slowTick = slowTickLimit;
 
-    public Enemy(float x, float y, int iD, int enemyType) {
+    public Enemy(float x, float y, int iD, int enemyType, EnemyManager enemyManager) {
         this.x = x;
         this.y = y;
         this.iD = iD;
         this.enemyType = enemyType;
+        this.enemyManager = enemyManager;
         bounds = new Rectangle((int) x, (int) y, 32, 32);
         // -1 for starting point / first decision where to go
         lastDir = -1;
@@ -38,6 +41,7 @@ public abstract class Enemy {
         this.health -= dmg;
         if (health <=0) {
             alive = false;
+            enemyManager.rewardPlayer(enemyType);
         }
     }
 
