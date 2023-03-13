@@ -144,7 +144,7 @@ public class Constants {
                 case WOLF:
                     return 100;
                 case BOSS:
-                    return 1000;
+                    return 5000;
             }
             return 0;
         }
