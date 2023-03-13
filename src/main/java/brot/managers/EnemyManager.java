@@ -26,10 +26,10 @@ public class EnemyManager {
         this.start = start;
         this.end= end;
         loadEffectImg();
-        addEnemy(ORC);
-        addEnemy(BAT);
-        addEnemy(KNIGHT);
-        addEnemy(WOLF);
+//        addEnemy(ORC);
+//        addEnemy(BAT);
+//        addEnemy(KNIGHT);
+//        addEnemy(WOLF);
         loadEnemyImgs();
     }
 
@@ -46,12 +46,33 @@ public class EnemyManager {
     }
 
     public void update() {
+        updateWaveManager();
+        if (isTimeForNewEnemy()) {
+            spawnEnemy();
+        }
         for (Enemy e : enemies) {
             if (e.isAlive()) {
                 // Is next tile road(pos, dir) / check next step
                 updateEnemyMove(e);
             }
         }
+    }
+
+    private void updateWaveManager() {
+        playing.getWaveManager().update();
+    }
+
+    private void spawnEnemy() {
+        addEnemy(playing.getWaveManager().getNextEnemy());
+    }
+
+    private boolean isTimeForNewEnemy() {
+        if (playing.getWaveManager().isTimeForNewEnemy()) {
+            if (playing.getWaveManager().isThereMoreEnemiesInWave()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void updateEnemyMove(Enemy e) {
