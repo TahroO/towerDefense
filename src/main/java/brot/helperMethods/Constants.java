@@ -102,13 +102,13 @@ public class Constants {
         public static int getReward(int enemyType) {
             switch (enemyType) {
                 case ORC:
-                    return 5;
+                    return 4;
                 case BAT:
                     return 3;
                 case KNIGHT:
-                    return 20;
+                    return 10;
                 case WOLF:
-                    return 8;
+                    return 5;
             }
             return 0;
         }
