@@ -59,7 +59,7 @@ public class Constants {
         public static int getStartDmg(int towerType) {
             switch (towerType) {
                 case CANNON:
-                    return 15;
+                    return 10;
                 case ARCHER:
                     return 5;
                 case WIZARD:
@@ -71,11 +71,11 @@ public class Constants {
         public static float getDefaultRange(int towerType) {
             switch (towerType) {
                 case CANNON:
-                    return 90;
+                    return 80;
                 case ARCHER:
-                    return 120;
+                    return 100;
                 case WIZARD:
-                    return 110;
+                    return 90;
             }
             return 0;
         }
@@ -104,11 +104,11 @@ public class Constants {
                 case ORC:
                     return 5;
                 case BAT:
-                    return 5;
+                    return 3;
                 case KNIGHT:
                     return 20;
                 case WOLF:
-                    return 10;
+                    return 8;
             }
             return 0;
         }
@@ -121,7 +121,7 @@ public class Constants {
                 case BAT:
                     return 0.65f;
                 case KNIGHT:
-                    return 0.3f;
+                    return 0.4f;
                 case WOLF:
                     return 0.75f;
             }
@@ -131,13 +131,13 @@ public class Constants {
         public static int getStartHealth(int enemyType) {
             switch (enemyType) {
                 case ORC:
-                    return 150;
+                    return 160;
                 case BAT:
-                    return 60;
+                    return 80;
                 case KNIGHT:
-                    return 250;
+                    return 350;
                 case WOLF:
-                    return 90;
+                    return 100;
             }
             return 0;
         }
