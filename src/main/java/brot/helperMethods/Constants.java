@@ -5,6 +5,7 @@ public class Constants {
         public static final int ARROW = 0;
         public static final int CHAINS = 1;
         public static final int BOMB = 2;
+
         public static float getSpeed(int type) {
             switch (type) {
                 case ARROW:
@@ -17,6 +18,7 @@ public class Constants {
             return 0f;
         }
     }
+
     public static class Direction {
         public static final int LEFT = 0;
         public static final int UP = 1;
@@ -24,10 +26,24 @@ public class Constants {
         public static final int DOWN = 3;
 
     }
+
     public static class Towers {
         public static final int CANNON = 0;
         public static final int ARCHER = 1;
         public static final int WIZARD = 2;
+
+        public static int getTowerCost(int towerType) {
+            switch (towerType) {
+                case CANNON:
+                    return 65;
+                case ARCHER:
+                    return 30;
+                case WIZARD:
+                    return 45;
+            }
+            return 0;
+        }
+
         public static String getName(int towerType) {
             switch (towerType) {
                 case CANNON:
@@ -39,6 +55,7 @@ public class Constants {
             }
             return "";
         }
+
         public static int getStartDmg(int towerType) {
             switch (towerType) {
                 case CANNON:
@@ -50,6 +67,7 @@ public class Constants {
             }
             return 0;
         }
+
         public static float getDefaultRange(int towerType) {
             switch (towerType) {
                 case CANNON:
@@ -61,6 +79,7 @@ public class Constants {
             }
             return 0;
         }
+
         // Amount of updates between shots
         public static float getDefaultCooldown(int towerType) {
             switch (towerType) {
@@ -74,11 +93,13 @@ public class Constants {
             return 0;
         }
     }
+
     public static class Enemies {
         public static final int ORC = 0;
         public static final int BAT = 1;
         public static final int KNIGHT = 2;
         public static final int WOLF = 3;
+
         public static float getSpeed(int enemyType) {
 
             switch (enemyType) {
@@ -108,6 +129,7 @@ public class Constants {
             return 0;
         }
     }
+
     public static class Tiles {
         public static final int WATER_TILE = 0;
         public static final int GRASS_TILE = 1;

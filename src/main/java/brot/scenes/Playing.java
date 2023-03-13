@@ -178,6 +178,7 @@ public class Playing extends GameScene implements SceneMethods {
                     // Check if the tile is free to place a tower
                     if (getTowerAt(mouseX, mouseY) == null) {
                         towerManager.addTower(selectedTower, mouseX, mouseY);
+                        removeGold(selectedTower.getTowerType());
                         selectedTower = null;
                     }
                 }
@@ -187,6 +188,10 @@ public class Playing extends GameScene implements SceneMethods {
                     actionBar.displayTower(t);
             }
         }
+    }
+
+    private void removeGold(int towerType) {
+        actionBar.payForTower(towerType);
     }
 
     private Tower getTowerAt(int x, int y) {
