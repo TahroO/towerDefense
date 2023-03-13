@@ -41,6 +41,12 @@ public abstract class Enemy {
         }
     }
 
+    // If enemy reaches end, kill it
+    public void kill() {
+        alive = false;
+        health = 0;
+    }
+
     // Move enemy
     public void move(float speed, int dir) {
         lastDir = dir;
@@ -69,7 +75,6 @@ public abstract class Enemy {
         bounds.x = (int)x;
         bounds.y = (int)y;
     }
-
     public void setPos(int x, int y) {
         // For position fix only / do not use for move
         this.x = x;
@@ -79,6 +84,7 @@ public abstract class Enemy {
     public float getHealthBarFloat() {
         return health / (float)maxHealth;
     }
+
     public float getX() {
         return x;
     }
@@ -98,10 +104,10 @@ public abstract class Enemy {
     public int getiD() {
         return iD;
     }
-
     public int getEnemyType() {
         return enemyType;
     }
+
     public int getLastDir() {
         return lastDir;
     }
@@ -109,10 +115,10 @@ public abstract class Enemy {
     public boolean isAlive() {
         return alive;
     }
-
     public void slow() {
         slowTick = 0;
     }
+
     public boolean isSlowed() {
         return slowTick < slowTickLimit;
     }
