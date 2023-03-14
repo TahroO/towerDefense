@@ -140,11 +140,11 @@ public class Constants {
                 case BAT:
                     return 115;
                 case KNIGHT:
-                    return 350;
+                    return 400;
                 case WOLF:
                     return 95;
                 case BOSS:
-                    return 7500;
+                    return 9000;
             }
             return 0;
         }
