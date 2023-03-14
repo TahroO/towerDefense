@@ -30,6 +30,7 @@ public class Playing extends GameScene implements SceneMethods {
     private Tower selectedTower;
     private PathPoint start, end;
     private int goldTick;
+    private boolean gamePaused;
 
     public Playing(Game game) {
         super(game);
@@ -53,33 +54,35 @@ public class Playing extends GameScene implements SceneMethods {
     }
 
     public void update() {
-        updateTick();
-        waveManager.update();
-        // Gold tick
-        goldTick++;
-        if (goldTick % (60 * 3) == 0) {
-            actionBar.addGold(1);
-        }
-        if (isAllEnemiesDead()) {
-            if (isThereMoreWaves()) {
-                waveManager.startWaveTimer();
-                // Check timer
-                if (isWaveTimerOver()) {
-                    // Increase waveIndex
-                    waveManager.increaseWaveIndex();
-                    // Remove enemies from list
-                    enemyManager.getEnemies().clear();
-                    waveManager.resetEnemyIndex();
+        if (!gamePaused) {
+            updateTick();
+            waveManager.update();
+            // Gold tick
+            goldTick++;
+            if (goldTick % (60 * 3) == 0) {
+                actionBar.addGold(1);
+            }
+            if (isAllEnemiesDead()) {
+                if (isThereMoreWaves()) {
+                    waveManager.startWaveTimer();
+                    // Check timer
+                    if (isWaveTimerOver()) {
+                        // Increase waveIndex
+                        waveManager.increaseWaveIndex();
+                        // Remove enemies from list
+                        enemyManager.getEnemies().clear();
+                        waveManager.resetEnemyIndex();
 
+                    }
                 }
             }
+            if (isTimeForNewEnemy()) {
+                spawnEnemy();
+            }
+            enemyManager.update();
+            towerManager.update();
+            projectileManager.update();
         }
-        if (isTimeForNewEnemy()) {
-            spawnEnemy();
-        }
-        enemyManager.update();
-        towerManager.update();
-        projectileManager.update();
     }
 
     private boolean isWaveTimerOver() {
@@ -209,6 +212,9 @@ public class Playing extends GameScene implements SceneMethods {
     private Tower getTowerAt(int x, int y) {
         return towerManager.getTowerAt(x, y);
     }
+    public void setGamePaused(boolean gamePaused) {
+        this.gamePaused = gamePaused;
+    }
 
     // Place towers only on green
 
@@ -262,5 +268,8 @@ public class Playing extends GameScene implements SceneMethods {
 
     public void shootEnemy(Tower t, Enemy e) {
         projectileManager.newProjectile(t, e);
+    }
+    public boolean isGamePaused() {
+        return gamePaused;
     }
 }

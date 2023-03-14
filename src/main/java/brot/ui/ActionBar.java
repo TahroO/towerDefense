@@ -7,12 +7,11 @@ import brot.scenes.Playing;
 import java.awt.*;
 import java.text.DecimalFormat;
 
-import static brot.main.GameStates.MENU;
-import static brot.main.GameStates.setGameState;
+import static brot.main.GameStates.*;
 
 public class ActionBar extends Bar {
     private Playing playing;
-    private MyButton bMenu;
+    private MyButton bMenu, bPause;
     private MyButton[] towerButtons;
     private MyButton sellTower, upgradeTower;
     private Tower selectedTower;
@@ -44,6 +43,11 @@ public class ActionBar extends Bar {
         // towerCost
         if (showTowerCost) {
             drawTowerCost(g);
+        }
+        // game pause text
+        if (playing.isGamePaused()) {
+            g.setColor(Color.BLACK);
+            g.drawString("Game is paused!", 110, 790);
         }
     }
 
@@ -116,7 +120,7 @@ public class ActionBar extends Bar {
             g.setFont(new Font("LucidaSans", Font.BOLD, 15));
             g.drawString("" + Constants.Towers.getName(displayedTower.getTowerType()), 480, 660);
             g.drawString("ID: " + displayedTower.getiD(), 480, 675);
-            g.drawString("Tier:" + displayedTower.getTier(), 560,660);
+            g.drawString("Tier:" + displayedTower.getTier(), 560, 660);
             // Draw a border around selected tower
             drawDisplayedTowerBorder(g);
             drawDisplayTowerRange(g);
@@ -145,7 +149,7 @@ public class ActionBar extends Bar {
     }
 
     private int getSellAmount(Tower displayedTower) {
-        int upgradeCost = (displayedTower.getTier() -1) * getUpgradeCost(displayedTower);
+        int upgradeCost = (displayedTower.getTier() - 1) * getUpgradeCost(displayedTower);
         upgradeCost *= 0.5f;
         return Constants.Towers.getTowerCost(displayedTower.getTowerType()) / 2 + upgradeCost;
     }
@@ -168,6 +172,7 @@ public class ActionBar extends Bar {
 
     private void initButtons() {
         bMenu = new MyButton("Menu", 2, 642, 100, 30);
+        bPause = new MyButton("Pause", 2, 682, 100, 30);
         towerButtons = new MyButton[3];
         int w = 50;
         int h = 50;
@@ -185,6 +190,7 @@ public class ActionBar extends Bar {
 
     private void drawButtons(Graphics g) {
         bMenu.draw(g);
+        bPause.draw(g);
         for (MyButton b : towerButtons) {
             g.setColor(Color.GRAY);
             g.fillRect(b.x, b.y, b.width, b.height);
@@ -196,7 +202,7 @@ public class ActionBar extends Bar {
     private void sellTowerClicked() {
         playing.removeTower(displayedTower);
         gold += Constants.Towers.getTowerCost(displayedTower.getTowerType()) / 2;
-        int upgradeCost = (displayedTower.getTier() -1) * getUpgradeCost(displayedTower);
+        int upgradeCost = (displayedTower.getTier() - 1) * getUpgradeCost(displayedTower);
         upgradeCost *= 0.5f;
         gold += upgradeCost;
         displayedTower = null;
@@ -211,6 +217,9 @@ public class ActionBar extends Bar {
     public void mouseClicked(int x, int y) {
         if (bMenu.getBounds().contains(x, y)) {
             setGameState(MENU);
+        } else if (bPause.getBounds().contains(x, y)) {
+            togglePause();
+
         } else {
             if (displayedTower != null) {
                 if (sellTower.getBounds().contains(x, y)) {
@@ -235,12 +244,23 @@ public class ActionBar extends Bar {
         }
     }
 
+    private void togglePause() {
+        // Switch between pause and play mode
+        playing.setGamePaused(!playing.isGamePaused());
+        if (playing.isGamePaused()) {
+            bPause.setText("Unpause");
+        } else {
+            bPause.setText("Pause");
+        }
+    }
+
     private boolean isEnoughGoldForTower(int towerType) {
         return gold >= Constants.Towers.getTowerCost(towerType);
     }
 
     public void mouseMoved(int x, int y) {
         bMenu.setMouseOver(false);
+        bPause.setMouseOver(false);
         showTowerCost = false;
         sellTower.setMouseOver(false);
         upgradeTower.setMouseOver(false);
@@ -250,6 +270,8 @@ public class ActionBar extends Bar {
 
         if (bMenu.getBounds().contains(x, y)) {
             bMenu.setMouseOver(true);
+        } else if (bPause.getBounds().contains(x, y)) {
+            bPause.setMouseOver(true);
         } else {
             if (displayedTower != null) {
                 if (sellTower.getBounds().contains(x, y)) {
@@ -274,6 +296,8 @@ public class ActionBar extends Bar {
     public void mousePressed(int x, int y) {
         if (bMenu.getBounds().contains(x, y)) {
             bMenu.setMousePressed(true);
+        } else if (bPause.getBounds().contains(x, y)) {
+            bPause.setMousePressed(true);
         } else {
             if (displayedTower != null) {
                 if (sellTower.getBounds().contains(x, y)) {
@@ -296,6 +320,7 @@ public class ActionBar extends Bar {
 
     public void mouseReleased(int x, int y) {
         bMenu.resetBooleans();
+        bPause.resetBooleans();
         sellTower.resetBooleans();
         upgradeTower.resetBooleans();
         for (MyButton b : towerButtons) {

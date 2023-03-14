@@ -61,7 +61,7 @@ public class Constants {
                 case CANNON:
                     return 10;
                 case ARCHER:
-                    return 5;
+                    return 6;
                 case WIZARD:
                     return 0;
             }
@@ -103,13 +103,13 @@ public class Constants {
         public static int getReward(int enemyType) {
             switch (enemyType) {
                 case ORC:
-                    return 3;
-                case BAT:
                     return 4;
+                case BAT:
+                    return 5;
                 case KNIGHT:
                     return 10;
                 case WOLF:
-                    return 5;
+                    return 6;
                 case BOSS:
                     return 50;
             }
@@ -142,7 +142,7 @@ public class Constants {
                 case KNIGHT:
                     return 350;
                 case WOLF:
-                    return 105;
+                    return 95;
                 case BOSS:
                     return 7500;
             }
