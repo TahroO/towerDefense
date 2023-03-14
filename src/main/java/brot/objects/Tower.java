@@ -2,8 +2,10 @@ package brot.objects;
 
 import brot.helperMethods.Constants;
 
+import static brot.helperMethods.Constants.Towers.*;
+
 public class Tower {
-    private int x, y, iD, towerType, cdTick, dmg;
+    private int x, y, iD, towerType, cdTick, dmg, tier;
     private float range, cooldown;
 
     public Tower(int x, int y, int iD, int towerType) {
@@ -11,12 +13,32 @@ public class Tower {
         this.y = y;
         this.iD = iD;
         this.towerType = towerType;
+        tier = 1;
         setDefaultDmg();
         setDefaultRange();
         setDefaultCooldown();
     }
     public void update() {
         cdTick++;
+    }
+    public void upgradeTower() {
+        this.tier++;
+        switch (towerType) {
+            case ARCHER:
+                dmg += 2;
+                range += 5;
+                cooldown -= 3;
+                break;
+            case WIZARD:
+                range += 20;
+                cooldown -= 10;
+                break;
+            case CANNON:
+                dmg += 5;
+                range += 10;
+                cooldown -= 15;
+                break;
+        }
     }
 
     public boolean isCooldownOver() {
@@ -82,5 +104,7 @@ public class Tower {
         this.towerType = towerType;
     }
 
-
+    public int getTier() {
+        return tier;
+    }
 }

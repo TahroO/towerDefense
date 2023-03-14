@@ -50,16 +50,16 @@ public class WaveManager {
     }
 
     private void createWaves() {
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,0,0,0,0))));
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1,1,1,1,1))));
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1,1,0,0,0,0,0,1,1,2))));
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,0,0,0,0,0,1,1,3))));
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1,1,0,0,0,3,3,3,2,2))));
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,3,3,0,0,0,1,1,3,0,0,0,0,0,0))));
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,2,1,1,1,3,0,0,2,1,1,1,1,0,3,3,0))));
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,2,2,3,3,3,2,2,2,1,1,1,0,0,2,2,2,2,2))));
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,2,2,3,3,3,2,2,2,2,1,1,0,0,2,2,2,2,2,0,0,0))));
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(4))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,1))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,0,1,1,0,3,3,1,1,0))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1,1,0,0,0,0,0,1,1,2,2,2,3,3))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,0,0,0,0,0,1,1,3,2,2,1,3,3))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1,1,0,0,0,3,3,3,2,2,2,0,0,0,3,3))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,3,3,0,0,0,1,1,3,0,0,0,0,0,0,3,3))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,2,1,1,1,3,0,0,2,1,1,1,1,0,3,3,0,2,2))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,2,2,3,3,3,2,2,2,1,1,1,0,0,2,2,2,2,2,3,3))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,2,2,2,3,3,3,2,2,2,2,1,1,0,0,2,2,2,2,2,0,0,0,3,3,3,3,3,2,2,3))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,4))));
     }
     public ArrayList<Wave> getWaves() {
         return waves;

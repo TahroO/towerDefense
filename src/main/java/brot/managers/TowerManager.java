@@ -38,6 +38,22 @@ public class TowerManager {
         }
     }
 
+    public void removeTower(Tower displayedTower) {
+        for (int i = 0; i < towers.size(); i++) {
+            if (towers.get(i).getiD() == displayedTower.getiD()) {
+                towers.remove(i);
+            }
+        }
+    }
+
+    public void upgradeTower(Tower displayedTower) {
+        for (Tower t : towers) {
+            if (t.getiD() == displayedTower.getiD()) {
+                t.upgradeTower();
+            }
+        }
+    }
+
     private void attackEnemyIfClose(Tower t) {
             for (Enemy e : playing.getEnemyManager().getEnemies()) {
                 if (e.isAlive()) {
@@ -58,7 +74,6 @@ public class TowerManager {
         int range = brot.helperMethods.Utils.getHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
         return range < t.getRange();
     }
-
     public void draw(Graphics g) {
         for (Tower t : towers) {
             g.drawImage(towerImgs[t.getTowerType()], t.getX(), t.getY(), null);
@@ -66,6 +81,7 @@ public class TowerManager {
     }
 
     // Check if there is already a tower on this position
+
     public Tower getTowerAt(int x, int y) {
         for (Tower t : towers) {
             if (t.getX() == x) {

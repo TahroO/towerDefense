@@ -120,15 +120,15 @@ public class Constants {
 
             switch (enemyType) {
                 case ORC:
-                    return 0.4f;
+                    return 0.5f;
                 case BAT:
-                    return 0.55f;
-                case KNIGHT:
-                    return 0.3f;
-                case WOLF:
                     return 0.65f;
+                case KNIGHT:
+                    return 0.4f;
+                case WOLF:
+                    return 0.75f;
                 case BOSS:
-                    return 0.2f;
+                    return 0.3f;
             }
             return 0f;
         }
@@ -136,15 +136,15 @@ public class Constants {
         public static int getStartHealth(int enemyType) {
             switch (enemyType) {
                 case ORC:
-                    return 80;
+                    return 100;
                 case BAT:
-                    return 95;
+                    return 115;
                 case KNIGHT:
                     return 350;
                 case WOLF:
-                    return 90;
+                    return 105;
                 case BOSS:
-                    return 5000;
+                    return 7500;
             }
             return 0;
         }

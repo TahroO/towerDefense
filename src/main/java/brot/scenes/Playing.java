@@ -200,10 +200,18 @@ public class Playing extends GameScene implements SceneMethods {
         actionBar.payForTower(towerType);
     }
 
+    public void upgradeTower(Tower displayedTower) {
+        towerManager.upgradeTower(displayedTower);
+    }
+    public void removeTower(Tower displayedTower) {
+        towerManager.removeTower(displayedTower);
+    }
     private Tower getTowerAt(int x, int y) {
         return towerManager.getTowerAt(x, y);
     }
+
     // Place towers only on green
+
     private boolean isTileGrass(int x, int y) {
         int iD = lvl[y / 32][x / 32];
         int tileType = game.getTileManager().getTile(iD).getTileType();
@@ -226,7 +234,6 @@ public class Playing extends GameScene implements SceneMethods {
             mouseY = (y / 32) * 32;
         }
     }
-
     @Override
     public void mousePressed(int x, int y) {
         if (y >= 640) {
@@ -241,13 +248,14 @@ public class Playing extends GameScene implements SceneMethods {
     @Override
     public void mouseDragged(int x, int y) {
     }
-
     public void rewardPlayer(int enemyType) {
         actionBar.addGold(Constants.Enemies.getReward(enemyType));
     }
+
     public TowerManager getTowerManager() {
         return towerManager;
     }
+
     public EnemyManager getEnemyManager() {
         return enemyManager;
     }
