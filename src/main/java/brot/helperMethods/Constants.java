@@ -122,11 +122,11 @@ public class Constants {
                 case ORC:
                     return 0.5f;
                 case BAT:
-                    return 0.65f;
+                    return 0.6f;
                 case KNIGHT:
                     return 0.4f;
                 case WOLF:
-                    return 0.75f;
+                    return 0.65f;
                 case BOSS:
                     return 0.3f;
             }
