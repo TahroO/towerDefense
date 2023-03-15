@@ -99,7 +99,7 @@ public class ProjectileManager {
                         explosions.add(new Explosion(p.getPos()));
                         explodeOnEnemies(p);
                     }
-                } else {
+                } else if(isProjOutsideBounds(p)) {
 
                 }
             }
@@ -110,6 +110,19 @@ public class ProjectileManager {
                 e.update();
             }
         }
+    }
+
+    private boolean isProjOutsideBounds(Projectile p) {
+        if (p.getPos().x > 0) {
+            if (p.getPos().x < 640) {
+                if (p.getPos().y >= 0) {
+                    if (p.getPos().y <= 800){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     private void explodeOnEnemies(Projectile p) {
@@ -197,5 +210,10 @@ public class ProjectileManager {
         public Point2D.Float getPos() {
             return pos;
         }
+    }
+    public void reset() {
+        projectiles.clear();
+        explosions.clear();
+        proj_id = 0;
     }
 }

@@ -100,4 +100,8 @@ public class TowerManager {
     public void addTower(Tower selectedTower, int xPos, int yPos) {
         towers.add(new Tower(xPos, yPos, towerAmount++, selectedTower.getTowerType()));
     }
+    public void reset() {
+        towers.clear();
+        towerAmount = 0;
+    }
 }

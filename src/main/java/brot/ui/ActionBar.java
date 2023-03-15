@@ -20,12 +20,22 @@ public class ActionBar extends Bar {
     private int gold = 100;
     private boolean showTowerCost;
     private int towerCostType;
+    private int lives = 5;
 
     public ActionBar(int x, int y, int width, int height, Playing playing) {
         super(x, y, width, height);
         this.playing = playing;
         formatter = new DecimalFormat("0.00");
         initButtons();
+    }
+
+    public void resetEverything() {
+        lives = 5;
+        towerCostType = 0;
+        showTowerCost = false;
+        gold = 100;
+        selectedTower = null;
+        displayedTower = null;
     }
 
     public void draw(Graphics g) {
@@ -49,6 +59,9 @@ public class ActionBar extends Bar {
             g.setColor(Color.BLACK);
             g.drawString("Game is paused!", 110, 790);
         }
+        // lives
+        g.setColor(Color.black);
+        g.drawString("Lives: " + lives, 110, 760);
     }
 
     private void drawTowerCost(Graphics g) {
@@ -331,8 +344,17 @@ public class ActionBar extends Bar {
     public void payForTower(int towerType) {
         this.gold -= Constants.Towers.getTowerCost(towerType);
     }
-
     public void addGold(int reward) {
         this.gold += reward;
+    }
+    public int getLives() {
+        return lives;
+    }
+
+    public void removeOneLive() {
+        lives--;
+        if (lives <= 0) {
+            setGameState(GAME_OVER);
+        }
     }
 }

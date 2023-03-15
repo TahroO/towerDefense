@@ -4,10 +4,7 @@ import brot.helperMethods.LoadSave;
 import brot.inputs.KeyboardListener;
 import brot.inputs.MyMouseListener;
 import brot.managers.TileManager;
-import brot.scenes.Editing;
-import brot.scenes.Playing;
-import brot.scenes.Settings;
-import brot.scenes.Menu;
+import brot.scenes.*;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -26,6 +23,7 @@ public class Game extends JFrame implements Runnable {
     private Playing playing;
     private Settings settings;
     private Editing editing;
+    private GameOver gameOver;
     private TileManager tileManager;
 
 
@@ -33,6 +31,7 @@ public class Game extends JFrame implements Runnable {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
+        setTitle("Tower Defense");
         initClasses();
         createDefaultLevel();
         add(gameScreen);
@@ -56,6 +55,7 @@ public class Game extends JFrame implements Runnable {
         playing = new Playing(this);
         settings = new Settings(this);
         editing = new Editing(this);
+        gameOver = new GameOver(this);
     }
 
     private void start() {
@@ -143,6 +143,9 @@ public class Game extends JFrame implements Runnable {
 
     public Editing getEditor() {
         return editing;
+    }
+    public GameOver getGameOver() {
+        return gameOver;
     }
 
     public TileManager getTileManager() {
